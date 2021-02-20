@@ -1,13 +1,13 @@
 (function() {
-  const title = document.querySelector('head title')
-  if (!title || title.innerText.trim() != "Cloudflare Access") {
-    return
-  }
+    if (document.getElementsByClassName("base_AccessLogo")[0] === null) {
+        return
+    } else if (document.title.indexOf("Approve") > -1) {
+        document.getElementsByClassName("Button Button-is-block Button-is-juicy Approve")[0].click();
+    } else if (document.title.indexOf("Success ・ Cloudflare Access") > -1) {
 
-  const status = document.querySelector('body .main-content .main-message .title')
-  if (!status || status.innerText.trim() != "Success") {
-    return
-  }
+        chrome.runtime.sendMessage({
+            "close": true
+        });
+    }
 
-  chrome.runtime.sendMessage({"close": true});
 })();
